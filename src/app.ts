@@ -10,10 +10,20 @@ import proxyRoutes from './proxy-routes.js';
  */
 const app: Express = express();
 
+// Global CORS headers middleware
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  next();
+});
+
 // Apply global middleware
 app.use(compression());
 app.use(helmet({
-  contentSecurityPolicy: false // Disable CSP for proxy functionality
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: false,
+  crossOriginOpenerPolicy: false
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
