@@ -23,7 +23,8 @@ app.use(compression());
 app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginResourcePolicy: false,
-  crossOriginOpenerPolicy: false
+  crossOriginOpenerPolicy: false,
+  originAgentCluster: false
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
